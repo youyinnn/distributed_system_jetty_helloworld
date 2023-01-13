@@ -16,23 +16,33 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
-        <maven.enforcer.plugin.version>3.1.0</maven.enforcer.plugin.version>
-        <exec.plugin.version>3.1.0</exec.plugin.version>
-        <servlet.api.version>4.0.2</servlet.api.version>
-        <jetty.version>10.0.13</jetty.version>
+        <junit.version>5.9.2</junit.version>
+        <servlet.api.version>5.0.0</servlet.api.version>
+        <jetty.version>11.0.13</jetty.version>
     </properties>
 
     <dependencies>
-
         <!-- 2. servlet 5.0 -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>${servlet.api.version}</version>
-            <scope>provided</scope>
         </dependency>
 
-        <!-- 3. jetty -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.10.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- jetty dependencies for deployment -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
@@ -53,11 +63,21 @@
 
     <build>
         <plugins>
-            <!-- 4. jetty exec plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+            <!-- jetty plugin for deployment -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>${exec.plugin.version}</version>
+                <version>3.1.0</version>
                 <configuration>
                     <classpathScope>test</classpathScope>
                     <executable>java</executable>
@@ -69,6 +89,13 @@
                         <argument>8080</argument>
                     </arguments>
                 </configuration>
+            </plugin>
+
+            <!-- jetty plugin for development -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
             </plugin>
         </plugins>
     </build>
