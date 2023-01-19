@@ -10,19 +10,34 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.*;
+import java.util.Arrays;
 
 public class EmbeddingJettyStarter {
 
     public static void main(String[] args) throws Exception
     {
         int port = 8080;
-        Server server = new Server(port);
+        StringBuilder contextPath = new StringBuilder("/");
+        System.out.println("Received arguments from pom configure:");
+        System.out.println(Arrays.toString(args));
 
+        for (String arg: args) {
+            final String[] split = arg.split("=");
+            if (split[0].equals("--port")) {
+                port = Integer.parseInt(split[1]);
+            }
+            if (split[0].equals("--context")) {
+                contextPath.append(split[1]);
+            }
+        }
+
+
+        Server server = new Server(port);
         URI webResourceBase = findWebResourceBase(server.getClass().getClassLoader());
         System.err.println("Using BaseResource: " + webResourceBase);
         WebAppContext context = new WebAppContext();
         context.setBaseResource(Resource.newResource(webResourceBase));
-        context.setContextPath("/");
+        context.setContextPath(contextPath.toString());
         context.setParentLoaderPriority(true);
         server.setHandler(context);
         server.start();
