@@ -86,8 +86,6 @@
                         <classpath />
                         <!-- 5. point to the starter -->
                         <argument>org.example.EmbeddingJettyStarter</argument>
-                        <argument>--port=8080</argument>
-                        <argument>--context=coen6317</argument>
                     </arguments>
                 </configuration>
             </plugin>
