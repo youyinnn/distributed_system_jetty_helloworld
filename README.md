@@ -32,7 +32,7 @@
 mvn jetty:run
 ```
 
-> The server config for development is at `pom.xml:86`.
+> The server config for development is at `pom.xml:97` for configuring the `jetty-maven-plugin`.
 >
 > Feel free to configure it.
 
