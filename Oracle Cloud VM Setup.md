@@ -1,26 +1,28 @@
 #### Create VM Instance on Oracle Cloud
 
-To use the oracle cloud, you will need to register a free account. And select your home region (to me, here is the Canada Southeast (Montreal) - Home RegionRegion Identifier: ca-montreal-1).
+To use the Oracle Cloud, you will need to register a free account.
+Select your home region (to me, here is the Canada Southeast (Montreal) - Home RegionRegion Identifier: ca-montreal-1).
 
-Then you go to the Launch resources, and select **Create a VM instance**:
+Then you go to the Launch resources and select **Create a VM instance**:
 
 ![](img/launch.png)
 
-Configure your, Image and Shape:
+Configure your Image and Shape:
 
 ![](img/shape.png)
 
-For free tier users, you have the `Always Free-eligible` on shape Ampere with 4 available CPUs and 24 GB available RAMs.
+For free tier users, you have the `Always Free-eligible` on shape Ampere with four available CPUs and 24 GB available RAMs.
 
 Please check: https://docs.oracle.com/en-us/iaas/Content/FreeTier/freetier_topic-Always_Free_Resources.htm#freetier_topic_Always_Free_Resources_Infrastructure
 
-You can allocate them into several instances, or you can put them all into one instance, as the figure shows.
+As the figure shows, you can allocate them into several instances or put them all into one instance.
 
-Then you set up your networks. You can **Create new virtual cloud network** or use the exixting one if you have. Change the name you like and leave others to stay default if you don't know what to do.
+Then, you set up your networks. You can **create a new virtual cloud network** or use the existing one if you have one. Change the name you like and leave others to default if you don't know what to do.
 
 ![](img/network.png)
 
-Add SSH Keys. You can use the one that oracle created for you, as the figure shows. And download the keys:
+Add SSH Keys. As the figure shows, you can use the one that Oracle Cloud created for you.
+Download the keys:
 
 ![](img/ssh.png)
 
@@ -55,7 +57,7 @@ And edit the config file under the `.ssh`:
 
 You can refer to: https://docs.oracle.com/en/cloud/cloud-at-customer/occ-get-started/log-vm-using-ssh.html
 
-Make sure you have the ssh install in your environment.
+Make sure you have the SSH installed in your environment.
 
 ```bash
 ssh <public_ip_address>
@@ -97,11 +99,11 @@ If you want to expose the `8080` port to the public:
 
       ![image-20230128150511712](img/vcn-list.png)
 
-   3. Add Ingress Rules for port range 8080 ~ 10080 (what ever you need)
+   3. Add Ingress Rules for port range 8080 ~ 10080 (whatever you need)
 
       ![image-20230128150930978](img/port.png)
 
-2. Open instance's firewall ports, refer to:
+2. Open instance's firewall ports refer to:
 
    https://docs.fedoraproject.org/en-US/quick-docs/firewalld/#opening-ports-firewalld-fedora
 
@@ -144,7 +146,7 @@ mvn jetty:run
 mvn clean install exec:exec
 ```
 
-Make sure you know where to configure the port and contextPath:
+Make sure you know where to configure the `port` and `contextPath`:
 
 ![image-20230128152548583](img/jetty-code-conf.png)
 
